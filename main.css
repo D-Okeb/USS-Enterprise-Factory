@@ -1,0 +1,605 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+Paaji+2:400,600,800&display=swap');
+
+:root {
+    --color-orange: rgba(230, 60, 34, 1);
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit; 
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; 
+}
+
+body {
+    font-family: 'Baloo Paaji 2', cursive;
+    color: whitesmoke;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 100vh repeat(6, max-content);
+}
+
+.header {
+    background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url(images/blue-space.jpg);
+    background-size: cover;
+    display: grid;
+    grid-template-rows: 10rem 1fr 14rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.navigation {
+    place-self: stretch;
+    background-color: rgba(18,17,17,.7);
+    display: grid;
+    grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    opacity: 0;
+    animation-name: navShow;
+    animation-delay: 2.5s;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.logo {
+    height: 8rem;
+    width: 8rem;
+    border-radius: 50%;
+    background-image: url(images/logo.png);
+    background-size: 150%;
+    background-position: center;
+}
+
+.logo-home-link {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.nav-items--list {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-items--list-item a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: whitesmoke;
+    padding: 1.5rem;
+    border: 1px solid rgba(230, 60, 34, 0);
+    transition: all .4s;
+}
+
+.nav-items--list-item a:hover {
+    border: 1px solid var(--color-orange);
+}
+
+.header-primary {
+    font-size: 8rem;
+    text-transform: uppercase;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.header-primary-1,
+.header-primary-2 {
+    opacity: 0;
+    text-align: center;
+    display: block;
+    line-height: 1.5;
+    text-shadow: 4px 4px 8px #000;
+    animation-name: moveUp;
+    animation-duration: 1s;
+    animation-delay: .5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+.header-primary-2 {
+    animation-delay: 1.5s;
+}
+
+.icon-down {
+    font-size: 6rem;
+    display: block;
+    color: var(--color-orange);
+    opacity: 0;
+    
+    animation-name: scrollDown;
+    animation-duration: 1.5s;
+    animation-delay: 2.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+.sca {
+    animation-name: scrollCallAnimation;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    animation-delay: 5s;
+}
+
+.section-about,
+.starship-intro,
+.starship-parts,
+.section-services,
+.section-innovation {
+    display: grid;
+    grid-template-columns: minmax(45rem, 1fr) minmax(40rem, 1fr);
+    align-items: center;
+    padding: 5rem;
+    padding-top: 10rem;
+    padding-bottom: 5rem;/*pokušaj*/
+    background-color: rgba(0,0,0,.95);
+/*    background: #1f2229; pozadina možda ????*/
+}
+
+.starship-intro,
+.section-services,
+.footer {
+    background-color: rgba(0,0,0,.94);
+}
+
+.section-about-image-container,
+.starship-intro-image-container,
+.starship-parts-image-container,
+.section-services-image-container,
+.section-innovation-image-container {
+    border-radius: 45px;
+    overflow: hidden;
+    border: 2px solid var(--color-orange);
+    display: grid;
+    grid: repeat(2, 1fr) / repeat(2, 1fr);
+}
+
+.section-about-image,
+.starship-intro-image,
+.starship-parts-image,
+.section-services-image,
+.section-innovation-image {
+    width: 100%;
+    grid-row: span 2;
+    grid-column: span 2;
+    max-height: 60vh;
+}
+
+.section-about-info-container,
+.starship-intro-info-container,
+.starship-parts-info-container,
+.section-services-info-container,
+.section-innovation-info-container {
+    padding: 6rem 8vw;
+    display: grid;
+    justify-items: start;
+}
+
+.section-about-heading,
+.starship-intro-heading,
+.starship-parts-heading,
+.section-services-heading,
+.section-innovation-heading {
+    text-transform: uppercase;
+    font-size: 3rem;
+    border-bottom: 2px solid var(--color-orange);
+}
+
+.section-about-text,
+.starship-intro-text,
+.starship-parts-text,
+.section-services-text,
+.section-innovation-text {
+    font-size: 1.4rem;
+    margin-top: 3rem;
+}
+
+.btn-text {
+    padding: .5rem;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: var(--color-orange);
+    margin-top: 4rem;
+    border: 1px solid whitesmoke;
+    transition: all .3s;
+}
+
+.btn-text:hover {
+    background-color: var(--color-orange);
+    color: whitesmoke;
+    border: 1px solid var(--color-orange);
+}
+
+.starship-intro,
+.starship-parts,
+.section-services,
+.section-innovation {
+    padding-top: 5rem;
+}
+
+/* FOOOTER  */
+
+.footer {
+    display: grid;
+    grid-auto-rows: max-content;
+}
+
+.language-container {
+    width: 50%;
+    justify-self: center;
+    padding: 1rem;
+    padding-top: 10rem;
+    padding-bottom: 5rem;
+}
+
+.language-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.language {
+    text-transform: uppercase;
+}
+
+.language-choice {
+    text-decoration: none;
+    color: inherit;
+    padding: 1.5rem;
+    border: 1px solid rgba(230, 60, 34, 0);
+    transition: all .4s;
+}
+
+.language-choice:hover {
+    border: 1px solid var(--color-orange);
+}
+
+.language-choice.eng {
+    padding: 1.5rem;
+    border: 1px solid var(--color-orange);
+}
+
+.info-container {
+    padding: 5rem;
+    padding-bottom: 10rem;
+}
+
+.subscription-form {
+    margin-top: 3.5rem;
+    display: grid;
+    width: 50vw;
+    grid-row-gap: 1.4rem;
+    justify-content: start;
+    grid-template-columns: 2rem 4fr 1fr;
+    grid-template-rows: max-content 4rem 2rem;
+}
+
+.call-to-sub {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.call-to-sub-label {
+    font-size: 1.4rem;
+    grid-column: 1 / -1;
+}
+
+.call-to-sub-input {
+    outline: none;
+    grid-column: 1 / 3;
+    padding-left: 1rem;
+    background-color: #1f2229;
+    border: none;
+    color: whitesmoke;
+    font-family: inherit;
+}
+
+
+/* OVO JE DA MI NA E-MAIL AUTOFILU NE MINJA BOJU POZADINA */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+/*
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+*/
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: whitesmoke;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.submit-btn {
+    color: var(--color-orange);
+    text-transform: uppercase;
+    background-color: transparent;
+    transition: all .3s;
+    border: 1px solid whitesmoke;
+    padding: .5rem;
+}
+
+.submit-btn:hover {
+    cursor: pointer;
+    background-color: var(--color-orange);
+    border: 1px solid var(--color-orange);
+    color: whitesmoke;
+}
+
+.check-input {
+    height: 2rem;
+    width: 2rem;
+}
+
+.agree-text {
+    font-size: 1.2rem;
+    padding-left: 2rem;
+}
+
+.agree-text a {
+    text-decoration: none;
+    color: lightblue;
+    transition: .3s;
+}
+
+.agree-text a:hover {
+    color: var(--color-orange);
+}
+
+.footer-links {
+    margin: 0 5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: max-content;
+    padding-top: 5rem;
+    justify-items: stretch;
+    border-top: 1px solid var(--color-orange);
+}
+
+.footer-links-1,
+.footer-links-2,
+.footer-links-media {
+    list-style: none;
+}
+
+.footer-links-1 a,
+.footer-links-2 a,
+.footer-links-media a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: inherit;
+    font-size: 1.4rem;
+    transition: all .3s;
+}
+
+.footer-links-1 a:hover,
+.footer-links-2 a:hover,
+.footer-links-media a:hover {
+    color: var(--color-orange);
+}
+
+.copyright {
+    padding: 5rem;
+    text-transform: uppercase;
+    padding-bottom: 10rem;
+}
+
+@keyframes moveUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10rem);
+        font-size: 20%;
+    }
+    
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        font-size: 100%;
+    }
+}
+
+@keyframes scrollDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-5rem);
+    }
+    
+    30% {
+        opacity: 1;
+    }
+    
+    70% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    80% {
+        transform: translateY(-1rem);
+        opacity: 1;
+    }
+    
+    85% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    90% {
+        transform: translateY(-.5rem);
+        opacity: 1;
+    }
+    
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes navShow {
+    0% {
+        opacity: 0;
+    }
+    
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes scrollCallAnimation {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    
+    88% {
+        transform: translateY(0);
+    }
+    
+    91% {
+        transform: translateY(1rem);
+    }
+    
+    94% {
+        transform: translateY(0);
+    }
+    
+    97% {
+        transform: translateY(1rem);
+    }
+}
+
+@media only screen and (max-width: 1350px) {
+    .language-container {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .header-primary {
+        font-size: 6rem;
+    }
+
+    .icon-down {
+        font-size: 5rem;
+    }
+
+    .scroll-down-icon {
+        align-self: end;
+        padding-bottom: 1rem;
+    }
+
+    .section-about {
+        padding-top: 5rem;
+    }
+
+    .section-about-info-container,
+    .starship-intro-info-container,
+    .starship-parts-info-container,
+    .section-services-info-container,
+    .section-innovation-info-container {
+        padding: 4rem 4vw;
+    }
+
+    .footer-links-2,
+    .footer-links-media {
+        justify-self: center;
+    }
+}
+
+@media only screen and (max-width: 1040px) {
+    .section-about-info-container,
+    .starship-intro-info-container,
+    .starship-parts-info-container,
+    .section-services-info-container,
+    .section-innovation-info-container {
+        padding: 1rem 2vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .language-container {
+        width: 100%;
+        padding: 5rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .subscription-form {
+        width: 70vw;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .header-primary,
+    .icon-down {
+        font-size: 4rem;
+    }
+
+    .section-about,
+    .starship-intro,
+    .starship-parts,
+    .section-services,
+    .section-innovation {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, max-content);
+        grid-row-gap: 3rem;
+    }
+
+    .starship-intro-image-container,
+    .section-services-image-container {
+        grid-row: 1 / 2;
+    }
+
+    .section-about-info-container,
+    .starship-intro-info-container,
+    .starship-parts-info-container,
+    .section-services-info-container,
+    .section-innovation-info-container {
+        padding: 0 0;
+    }
+
+    .language-list {
+        font-size: .85rem;
+    }
+
+    .subscription-form {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .section-about,
+    .starship-intro,
+    .starship-parts,
+    .section-services,
+    .section-innovation,
+    .language-container,
+    .info-container,
+    .copyright {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .footer-links {
+        margin: 0 2rem;
+    }
+
+    .language-list {
+        font-size: 1rem;
+    }
+}
