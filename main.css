@@ -25,6 +25,7 @@ body {
 .container {
     display: grid;
     grid-template-rows: 100vh repeat(6, max-content);
+    position: relative;
 }
 
 .header {
@@ -87,11 +88,127 @@ body {
     border: 1px solid var(--color-orange);
 }
 
+/* Menu botun*/
+.nav-items-overlay,
+.nav-items-overlay--list,
+.menu-btn {
+    display: none;
+}
+
+/* .nav-items-overlay {
+    position: relative;
+} */
+
+.menu-btn {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 7rem;
+    width: 8rem;
+    cursor: pointer;
+    transition: all .4s;
+    border: 3px solid var(--color-orange);
+    border-radius: 15px;
+}
+
+.menu-btn--burger {
+    width: 4rem;
+    height: 2.5px;
+    background: whitesmoke;
+    transition: all .4s;
+}
+
+.menu-btn--burger::before,
+.menu-btn--burger::after {
+    content: "";
+    position: absolute;
+    width: 4rem;
+    height: 2.5px;
+    background: whitesmoke;
+    transition: all .4s;
+}
+
+.menu-btn--burger::before {
+    transform: translateY(-1.2rem);
+}
+
+.menu-btn--burger::after {
+    transform: translateY(1.2rem);
+}
+
+/* Animacija menu botuna */
+.menu-btn.open .menu-btn--burger {
+    transform: translateX(-5rem);
+    background: transparent;
+}
+
+.menu-btn.open .menu-btn--burger::before {
+    transform: rotate(45deg) translate(3.5rem, -3.5rem);
+}
+
+.menu-btn.open .menu-btn--burger::after {
+    transform: rotate(-45deg) translate(3.5rem, 3.5rem);
+}
+
+/* Kraj menu botuna */
+
+/* menu izbornik */
+
+.nav-items-overlay--list {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 10rem);
+    width: 0;
+    background-color: rgba(0,0,0,.975);
+    transition: all .4s;
+    position: absolute;
+    top: 10rem;
+    right: 0;
+    align-items: flex-start;
+    padding-top: 1rem;
+    padding-left: .7rem;
+    /* bez overflowa probija ekran, a s njim se vidi malo crno, zato opacity*/
+    overflow: hidden;
+    opacity: 0;
+}
+
+.nav-items-overlay--list.open-list {
+    width: 25%;
+    opacity: 1;
+}
+
+.nav-items-overlay--list-item {
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.nav-items-overlay--list-item a {
+    text-decoration: none;
+    color: whitesmoke;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+.nav-items-overlay--list-item a:hover,
+.nav-items-overlay--list-item a:active {
+    color: var(--color-orange);
+}
+
+
+/* kraj menu izbornika */
+
 .header-primary {
     font-size: 8rem;
     text-transform: uppercase;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
+    transition: all .4s;
+}
+
+.header-primary.close {
+    visibility: hidden;
+    transform: translateX(-6rem);
+    opacity: 0;
 }
 
 .header-primary-1,
@@ -139,12 +256,12 @@ body {
 .starship-parts,
 .section-services,
 .section-innovation {
+    height: 33vw;
     display: grid;
-    grid-template-columns: minmax(45rem, 1fr) minmax(40rem, 1fr);
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 5rem;
     padding: 5rem;
-    padding-top: 10rem;
-    padding-bottom: 5rem;/*pokušaj*/
     background-color: rgba(0,0,0,.95);
 /*    background: #1f2229; pozadina možda ????*/
 }
@@ -163,8 +280,7 @@ body {
     border-radius: 45px;
     overflow: hidden;
     border: 2px solid var(--color-orange);
-    display: grid;
-    grid: repeat(2, 1fr) / repeat(2, 1fr);
+    grid-row: 1 / 3;
 }
 
 .section-about-image,
@@ -173,9 +289,8 @@ body {
 .section-services-image,
 .section-innovation-image {
     width: 100%;
-    grid-row: span 2;
-    grid-column: span 2;
-    max-height: 60vh;
+    height: 100%;
+    object-fit: cover;
 }
 
 .section-about-info-container,
@@ -183,7 +298,10 @@ body {
 .starship-parts-info-container,
 .section-services-info-container,
 .section-innovation-info-container {
-    padding: 6rem 8vw;
+    grid-row: 1 / 3;
+    place-self: center;
+    padding: 6rem;
+    /* To dvoje doli je da mi border bude dug samo koliko i heading */
     display: grid;
     justify-items: start;
 }
@@ -225,12 +343,6 @@ body {
     border: 1px solid var(--color-orange);
 }
 
-.starship-intro,
-.starship-parts,
-.section-services,
-.section-innovation {
-    padding-top: 5rem;
-}
 
 /* FOOOTER  */
 
@@ -249,8 +361,9 @@ body {
 
 .language-list {
     list-style: none;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: space-between;
 }
 
 .language {
@@ -503,8 +616,12 @@ select:-webkit-autofill:focus {
         padding-bottom: 1rem;
     }
 
-    .section-about {
-        padding-top: 5rem;
+    .section-about,
+    .starship-intro,
+    .starship-parts,
+    .section-services,
+    .section-innovation {
+        height: 40vw;
     }
 
     .section-about-info-container,
@@ -512,7 +629,7 @@ select:-webkit-autofill:focus {
     .starship-parts-info-container,
     .section-services-info-container,
     .section-innovation-info-container {
-        padding: 4rem 4vw;
+        padding: 4rem;
     }
 
     .footer-links-2,
@@ -527,7 +644,7 @@ select:-webkit-autofill:focus {
     .starship-parts-info-container,
     .section-services-info-container,
     .section-innovation-info-container {
-        padding: 1rem 2vw;
+        padding: 3rem;
     }
 }
 
@@ -536,33 +653,43 @@ select:-webkit-autofill:focus {
         width: 100%;
         padding: 5rem;
     }
-}
-
-@media only screen and (max-width: 900px) {
-    .subscription-form {
-        width: 70vw;
-    }
-}
-
-@media only screen and (max-width: 750px) {
-    .header-primary,
-    .icon-down {
-        font-size: 4rem;
-    }
 
     .section-about,
     .starship-intro,
     .starship-parts,
     .section-services,
     .section-innovation {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(2, max-content);
-        grid-row-gap: 3rem;
+        height: 45vw;
     }
 
+    .section-about-heading,
+    .starship-intro-heading,
+    .starship-parts-heading,
+    .section-services-heading,
+    .section-innovation-heading {
+        font-size: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+
+    .section-about,
+    .starship-intro,
+    .starship-parts,
+    .section-services,
+    .section-innovation {
+        height: 100vw;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        grid-row-gap: 1rem;
+    }
+
+    .section-about-image-container,
     .starship-intro-image-container,
-    .section-services-image-container {
-        grid-row: 1 / 2;
+    .starship-parts-image-container,
+    .section-services-image-container,
+    .section-innovation-image-container {
+        grid-row: 1 / 3;
     }
 
     .section-about-info-container,
@@ -570,7 +697,32 @@ select:-webkit-autofill:focus {
     .starship-parts-info-container,
     .section-services-info-container,
     .section-innovation-info-container {
-        padding: 0 0;
+        grid-row: 3 / 5;
+        padding: 0;
+    }
+
+    .subscription-form {
+        width: 70vw;
+    }
+
+    .nav-items {
+        display: none;
+    }
+
+    .nav-items-overlay {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .menu-btn {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .header-primary,
+    .icon-down {
+        font-size: 4rem;
     }
 
     .language-list {
@@ -582,7 +734,7 @@ select:-webkit-autofill:focus {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 700px) {
     .section-about,
     .starship-intro,
     .starship-parts,
@@ -591,15 +743,98 @@ select:-webkit-autofill:focus {
     .language-container,
     .info-container,
     .copyright {
-        padding-left: 2rem;
-        padding-right: 2rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
     .footer-links {
-        margin: 0 2rem;
+        margin: 0 1rem;
+    }
+}
+
+@media only screen and (max-width: 630px) {
+    .language-list {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(2, max-content);
+        grid-row-gap: 4rem;
+        justify-items: center;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .section-about,
+    .starship-intro,
+    .starship-parts,
+    .section-services,
+    .section-innovation {
+        height: 120vw;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    .section-about,
+    .starship-intro,
+    .starship-parts,
+    .section-services,
+    .section-innovation {
+        height: 140vw;
+        padding-bottom: 0;
+        padding-top: 2rem;
     }
 
-    .language-list {
+    .nav-items-overlay--list-item a {
         font-size: 1rem;
+    }
+
+    .section-about-heading,
+    .starship-intro-heading,
+    .starship-parts-heading,
+    .section-services-heading,
+    .section-innovation-heading,
+    .call-to-sub {
+        font-size: 1.5rem;
+    }
+
+    .section-about-text,
+    .starship-intro-text,
+    .starship-parts-text,
+    .section-services-text,
+    .section-innovation-text,
+    .btn-text,
+    .call-to-sub-label,
+    .submit-btn,
+    .agree-text {
+        font-size: 1.1rem;
+    }
+
+    .footer-links {
+        padding-top: 2rem;
+    }
+
+    .footer-links-1 li a,
+    .footer-links-2 li a,
+    .footer-links-media li a {
+        font-size: 1.1rem;
+    }
+
+    .check-input {
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    .info-container {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .language-container {
+        padding-top: 3rem;
+        padding-bottom: 1rem;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .header-primary {
+        font-size: 3rem;
     }
 }
